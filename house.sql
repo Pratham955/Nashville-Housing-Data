@@ -43,7 +43,7 @@ WHERE a.ParcelID = b.ParcelID
 AND a.UniqueID <> b.UniqueID 
 AND a.PropertyAddress IS NULL
 
--------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
 
 
 -- Breaking PropertyAddress in PropertySplitAddress, PropertySplitCity
@@ -60,7 +60,7 @@ ADD PropertySplitCity VARCHAR(20)
 UPDATE house
 SET PropertySplitCity = SPLIT_PART(PropertyAddress,',',2)
 
--------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
 
 -- Breaking OwnerAddress in OwnerSplitAddress, OwnerSplitCity, OwnerSplitState
 
@@ -82,7 +82,7 @@ ADD OwnerSplitState VARCHAR(10)
 UPDATE house
 SET OwnerSplitState = SPLIT_PART(OwnerAddress,',',3)
 
--------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 
 -- Change Y and N to Yes and No in the "Sold as Vacant" field
 
@@ -92,7 +92,7 @@ SET SoldAsVacant = CASE WHEN SoldAsVacant = 'Y' THEN 'Yes'
      ELSE SoldAsVacant
      END
 
--------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------
 
 -- Removing Duplicates
 
@@ -112,7 +112,7 @@ WHERE UniqueID IN
 	WHERE row_num > 1 
 )
 
--------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------
 
 -- Delete Unused Columns
 
@@ -120,7 +120,7 @@ ALTER TABLE house
 DROP PropertyAddress,
 DROP OwnerAddress
 
--------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------
 
 -- Data exploration
 
@@ -134,19 +134,19 @@ LIMIT 10
 
 -- Most preferred number of bedrooms
 
-Select Bedrooms,COUNT(Bedrooms) AS Number_of_Bedrooms
-From house
+SELECT Bedrooms,COUNT(Bedrooms) AS Number_of_Bedrooms
+FROM house
 WHERE Bedrooms IS NOT NULL
-Group by Bedrooms
-Order by Number_of_Bedrooms DESC
+GROUP BY Bedrooms
+ORDER BY Number_of_Bedrooms DESC
 
 -- Most preferred number of bathrooms
 
-Select FullBath, COUNT(FullBath) AS Number_of_Bathrooms
-From house
+SELECT FullBath, COUNT(FullBath) AS Number_of_Bathrooms
+FROM house
 WHERE FullBath IS NOT NULL
-Group by FullBath
-Order by Number_of_Bathrooms DESC
+GROUP BY FullBath
+ORDER BY Number_of_Bathrooms DESC
 
 --Top 10 land use with the highest average value of sale price
 
