@@ -1,4 +1,4 @@
-## CREATE TABLE house(
+CREATE TABLE house(
 UniqueID INTEGER,
 ParcelID VARCHAR(25),
 LandUse VARCHAR(50),
